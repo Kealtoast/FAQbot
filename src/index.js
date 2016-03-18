@@ -46,7 +46,7 @@ function isDefined(obj) {
     return obj != null;
 }
 
-controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambient'], function (bot, message) {
+controller.hears(['.*'], ['bot_message'], function (bot, message) {
 
     try {
         if (message.type == 'message') {
@@ -61,11 +61,23 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
                 var requestText = decoder.decode(message.text);
                 requestText = requestText.replace("’", "'");
 
+                var burnerMesageRegex = /Inbound message from \+(\d*):\s(.*)/;
+                var returnNumber = '';
+                var smsMessage;
+
+                // Parse the SMS message and return number out of Burner's slackbot message
+                if ((smsMessage = burnerMesageRegex.exec(requestText)) !== null) {
+                    returnNumber = '@' + smsMessage[1];
+                    requestText = smsMessage[2];
+
+                    console.log('returnNumber', returnNumber);
+                    console.log('requestText', requestText);
+                }
+
                 var channel = message.channel;
                 var messageType = message.event;
                 var botId = "<@" + bot.identity.id + ">";
 
-                console.log(requestText);
                 console.log(messageType);
 
                 if (requestText.indexOf(botId) > -1) {
@@ -85,7 +97,8 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
                     console.log(response);
 
                     if (isDefined(response.result)) {
-                        var responseText = response.result.fulfillment.speech;
+                        // Preface the response with the appropriate return SMS number.
+                        var responseText = returnNumber + ' ' + response.result.fulfillment.speech;
                         var action = response.result.action;
 
                         if (isDefined(responseText)) {
