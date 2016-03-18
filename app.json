@@ -1,6 +1,6 @@
 {
-  "name": "Burner connection to Api.ai via Slack",
-  "description": "This is a slackbot that enables connecting Burner telephone numbers to the Api.ai platform. Incoming SMS messages to your Burner line can be answered by an Api.ai intelligent agent via Burner's Slack connection.",
+  "name": "Burner to Api.ai via Slack",
+  "description": "A slackbot that enables connecting Burner lines to the Api.ai platform via Burner's Slack connection.",
   "repository": "https://github.com/voxable-labs/burner-sms-api-ai-slackbot",
   "logo": "https://avatars1.githubusercontent.com/u/15236552?v=3&s=200",
   "keywords": ["api.ai", "slack", "natural language", "slackbot", "burner", "voxable"],
