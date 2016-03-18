@@ -56,6 +56,10 @@ controller.hears(['.*'], ['bot_message'], function (bot, message) {
             else if (message.text.indexOf("<@U") == 0 && message.text.indexOf(bot.identity.id) == -1) {
                 // skip other users direct mentions
             }
+            else if (message.text.includes("Sent text to")) {
+                // skip sent text confirmations from Burner
+                console.log('Skipping Burner response.');
+            }
             else {
 
                 var requestText = decoder.decode(message.text);
