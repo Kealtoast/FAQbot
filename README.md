@@ -1,7 +1,5 @@
 # Intelligent SMS bot via Burner, Slack, and Api.ai
 
-## Overview
-
 By making use of [Burner's Slack connection](http://www.burnerapp.com/slack/) and [Api.ai's Slack integration](https://docs.api.ai/docs/slack-integration), you can easily create an intelligent SMS bot.
 
 
