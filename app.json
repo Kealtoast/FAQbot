@@ -1,9 +1,9 @@
 {
-  "name": "API.AI with Slack integration",
-  "description": "Api.ai Slack integration allows you to create Slack bots with natural language understanding based on Api.ai technology.",
-  "repository": "https://github.com/api-ai/api-ai-slack-bot",
-  "logo": "https://console.api.ai/api-client/assets/img/logo-black.png",
-  "keywords": ["api.ai", "slack", "natural language"],
+  "name": "Burner to Api.ai slackbot",
+  "description": "A slackbot that enables connecting Burner lines to the Api.ai platform via Burner's Slack connection.",
+  "repository": "https://github.com/voxable-labs/burner-sms-api-ai-slackbot",
+  "logo": "https://avatars1.githubusercontent.com/u/15236552?v=3&s=200",
+  "keywords": ["api.ai", "slack", "natural language", "slackbot", "burner", "voxable"],
   "env": {
     "accesstoken": {
       "description": "Client access token for Api.ai",

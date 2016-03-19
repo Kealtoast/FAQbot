@@ -1,125 +1,36 @@
-# Api.ai Slack Integration
+# Intelligent SMS bot via Burner, Slack, and Api.ai
 
 ## Overview
 
-Api.ai Slack integration allows you to create Slack bots with natural language understanding based on Api.ai technology.
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-To launch a bot, you’ll need the Linux OS. To launch it in other operating systems, use [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
-
-Api.ai documentation:
-
-- [How to create an Api.ai agent](https://docs.api.ai/docs/get-started#step-1-create-agent)
-- [How to obtain Api.ai authentication keys](https://docs.api.ai/docs/authentication)
-
-You’ll need 3 keys:
-
-- Client access token for Api.ai
-- Subscription key for Api.ai
-- Slack bot API token
-
-To obtain a Slack bot API token, create a new bot integration here: https://slack.com/apps/A0F7YS25R-bots.
-
-## Bot Launch
-
-To launch the bot, use one of the following commands:
-
-**For background launch mode (-d parameter):**
-
-```sh
-docker run -d --name slack_bot \
-           -e accesstoken="api.ai access key" \
-           -e subscriptionkey="api.ai subscription key" \
-           -e slackkey="slack bot key" \
-           api-ai/api-ai-slack-bot
-```
-
-**For interactive launch mode (-it parameter):**
-
-```sh
-docker run -it --name slack_bot \
-           -e accesstoken="Api.ai client access key" \
-           -e subscriptionkey="Api.ai subscription key" \
-           -e slackkey="Slack bot user key" \
-           api-ai/api-ai-slack-bot
-```
-
-To stop the bot from running in the interactive mode, press CTRL+C.
-
-In the background mode, you can control the bot’s state via simple commands:
+By making use of [Burner's Slack connection](http://www.burnerapp.com/slack/) and [Api.ai's Slack integration](https://docs.api.ai/docs/slack-integration), you can easily create an intelligent SMS bot.
 
 
-- `docker start slack_bot`
-- `docker stop slack_bot`,
+![burner api-ai slackbot mp4](https://cloud.githubusercontent.com/assets/2220/13895572/a82a92ba-ed42-11e5-8960-8dc91471d64a.gif)
 
-where `slack_bot` is the container name from the `run` command.
+What's happening above:
 
-## Custom Bot Launch
+* A user sends a text to our Burner line.
+* The Burner Slack connection posts the SMS in our Slack channel.
+* Our slackbot receives the SMS, parses out the sending phone number and message, and passes these on to our Api.ai agent.
+* Our Api.ai agent sends back a response, which our slackbot duly posts in the Slack channel, prepended with the number that sent the SMS.
+* The Burner Slack connection sends an SMS back to the user.
 
-If you want to customize your bot behavior, follow the steps below.
+## Getting Started
 
-1. Clone the repository https://github.com/xVir/api-ai-slack-bot 
+1. [Create an Api.ai agent.](https://docs.api.ai/docs/get-started#step-1-create-agent)
+2. [Activate the general knowledge domain for your agent.](https://docs.api.ai/docs/domains)
+3. [Obtain your Api.ai authentication keys.](https://docs.api.ai/docs/authentication)
+4. [Create a new slackbot.](https://slack.com/apps/A0F7YS25R-bots)
+5. [Obtain your Slackbot's API token.](https:/lslack.com/apps/manage/A0F7YS25R-bots)
+6. [Enable the Slack connection for your Burner line.](http://www.burnerapp.com/slack/)
+7. Click the handy "Deploy to Heroku" button below to deploy the bot to Heroku.
 
-2. Change the code to `index.js`
+	[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-3. In the Docker, use the `run` command specifying the full path to the directory containing the `index.js` file:
+8. Enter the credentials you gathered above in the "New App" screen and click the "Create App" button.
 
-```sh
-docker run -d --name slack_bot \
-           -e accesstoken="Api.ai client token" \
-           -e subscriptionkey="Api.ai Subscription key" \
-           -e slackkey="Slack bot user key" \
-           -v /full/path/to/your/src:/usr/app/src \
-           api-ai/api-ai-slack-bot
-```
+You're all set! Try texting a question to your Burner line, and you should get a response.
 
-## Code Notes
+## Credits
 
-Bot implementation is based on the Slack Botkit: https://github.com/howdyai/botkit.
-
-Message processing is done by the following code:
-
-```javascript
-controller.hears(['.*'],['direct_message','direct_mention','mention', 'ambient'], function(bot,message) {
-    console.log(message.text);
-    if (message.type == "message") {
-        if (message.user == bot.identity.id) {
-            // message from bot can be skipped
-        }
-        else {
-            var requestText = message.text;
-            var channel = message.channel;
-            if (!(channel in sessionIds)) {
-                sessionIds[channel] = uuid.v1();
-            }
-            var request = apiAiService.textRequest(requestText, { sessionId: sessionIds[channel] });
-            request.on('response', function (response) {
-                console.log(response);
-                if (response.result) {
-                    var responseText = response.result.fulfillment.speech;
-                    if (responseText) {
-                        bot.reply(message, responseText);
-                    }
-                }
-            });
-            request.on('error', function (error) {
-                console.log(error);
-            });
-            request.end();
-        }
-    }
-});
-```
-
-This code extracts the text from each message:
-
-`var requestText = message.text;`
-
-And sends it to Api.ai:
-
-`var request = apiAiService.textRequest(requestText, { sessionId: sessionIds[channel] });`
-
-If a non-empty response is received from Api.ai, the bot will respond with the received text:
-
-`bot.reply(message, responseText);`
+This is a fork of [Api.ai's Slack integration](https://github.com/api-ai/api-ai-slack-bot), with [minimal modifications](https://github.com/voxable-labs/burner-sms-api-ai-slackbot/pull/1/files#diff-1fdf421c05c1140f6d71444ea2b27638) needed to make the magic happen with Burner.

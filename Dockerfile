@@ -1,6 +1,6 @@
 FROM node:5.3.0
 
-MAINTAINER xVir <danil.skachkov@speaktoit.com>
+MAINTAINER Matt Buck <matt@voxable.io>
 
 RUN mkdir -p /usr/app/src
 WORKDIR /usr/app
