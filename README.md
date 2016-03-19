@@ -33,4 +33,4 @@ You're all set! Try texting a question to your Burner line, and you should get a
 
 ## Credits
 
-This is a fork of [Api.ai's Slack integration](https://github.com/api-ai/api-ai-slack-bot), with [minimal modifications](https://github.com/voxable-labs/burner-sms-api-ai-slackbot/pull/1) needed to make the magic happen with Burner.
+This is a fork of [Api.ai's Slack integration](https://github.com/api-ai/api-ai-slack-bot), with [minimal modifications](https://github.com/voxable-labs/burner-sms-api-ai-slackbot/pull/1/files) needed to make the magic happen with Burner.
