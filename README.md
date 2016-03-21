@@ -9,8 +9,8 @@ What's happening above:
 
 * A user sends a text to our Burner line.
 * The Burner Slack connection posts the SMS in our Slack channel.
-* Our slackbot receives the SMS, parses out the sending phone number and message, and passes these on to our Api.ai agent.
-* Our Api.ai agent sends back a response, which our slackbot duly posts in the Slack channel, prepended with the number that sent the SMS.
+* Our slackbot receives the SMS, parses out the sending phone number and message, and passes the message on to our Api.ai agent.
+* Our Api.ai agent sends back a response, which our slackbot duly posts in the Slack channel, prepended with the phone number that sent the SMS, ensuring that our response gets sent back to the correct user.
 * The Burner Slack connection sends an SMS back to the user.
 
 ## Getting Started
