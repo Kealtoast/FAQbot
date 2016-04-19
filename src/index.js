@@ -101,9 +101,8 @@ controller.hears(['.*'], ['bot_message'], function (bot, message) {
                     console.log(response);
 
                     if (isDefined(response.result)) {
-                        // Preface the response with the appropriate Burner command and phone
-                        // number for the response SMS message.
-                        var responseText = '/burner text ' + returnNumber + ' ' + response.result.fulfillment.speech;
+                        // Preface the response with the appropriate return SMS number.
+                        var responseText = returnNumber + ' ' + response.result.fulfillment.speech;
                         var action = response.result.action;
 
                         if (isDefined(responseText)) {
