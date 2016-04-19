@@ -20,7 +20,7 @@ What's happening above:
 3. [Obtain your Api.ai authentication keys.](https://docs.api.ai/docs/authentication)
 4. [Create a new slackbot.](https://slack.com/apps/A0F7YS25R-bots)
 5. [Obtain your Slackbot's API token.](https:/lslack.com/apps/manage/A0F7YS25R-bots)
-6. [Enable the Slack connection for your Burner line.](http://www.burnerapp.com/slack/)
+6. [Enable the Slack connection for your Burner line.](http://www.burnerapp.com/slack/) **Note:** You will need to invite the `burnerbot` Slackbot to the Slack channel in which you have activated the Burner connection.
 7. Click the handy "Deploy to Heroku" button below to deploy the bot to Heroku.
 
 	[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
