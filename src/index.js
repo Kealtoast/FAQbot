@@ -65,12 +65,12 @@ controller.hears(['.*'], ['bot_message'], function (bot, message) {
                 var requestText = decoder.decode(message.text);
                 requestText = requestText.replace("’", "'");
 
-                var burnerMesageRegex = /Inbound message from \+(\d*):\s(.*)/;
+                var burnerMessageRegex = /Inbound message from \+(\d*):\s(.*)/;
                 var returnNumber = '';
                 var smsMessage;
 
                 // Parse the SMS message and return number out of Burner's slackbot message
-                if ((smsMessage = burnerMesageRegex.exec(requestText)) !== null) {
+                if ((smsMessage = burnerMessageRegex.exec(requestText)) !== null) {
                     returnNumber = '@' + smsMessage[1];
                     requestText = smsMessage[2];
 
