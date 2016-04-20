@@ -106,7 +106,7 @@ controller.hears(['.*'], ['bot_message'], function (bot, message) {
                     if (isDefined(response.result)) {
                         // Message everyone in the channel if the question was not answered by the
                         // Api.ai agent.
-                        if ( response.result.fulfillment.speech === '' ) {
+                        if ( response.result.fulfillment.speech === '' || response.result.action === 'smalltalk.unknown' ) {
                             var responseText = '<!channel> The Api.ai agent encountered a request' +
                               ' it could not answer. Simply prepend a message with `/burner text ' +
                               '+' + returnNumber + '` to reply to the unanswered request.';
