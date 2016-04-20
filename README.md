@@ -53,7 +53,7 @@ You'll notice that, as in the "User says" section, you're able to add a number o
 
 ## Testing your agent
 
-Click on the grey box in the upper-right-hand corner that says "Try it now..." This is the test console, where you can enter a question you might receive from a custom to see how Api.ai handles it:
+Click on the grey box in the upper-right-hand corner that says "Try it now..." This is the test console, where you can enter a question you might receive from a customer to see how Api.ai handles it:
 
 <p align="center"><img title="Developer console" src="https://cloud.githubusercontent.com/assets/2220/14662755/ee926836-067e-11e6-85ba-f99dfb51fc2f.png" /></p>
 
