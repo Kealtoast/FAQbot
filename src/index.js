@@ -101,25 +101,24 @@ controller.hears(['.*'], ['bot_message'], function (bot, message) {
                     });
 
                 request.on('response', function (response) {
-                    console.log(response);
+                    console.log('response', response);
 
                     if (isDefined(response.result)) {
-                        // Preface the response with the appropriate return SMS number.
-                        var responseText = returnNumber + ' ' + response.result.fulfillment.speech;
-                        var action = response.result.action;
-
-                        if (isDefined(responseText)) {
-                            bot.reply(message, responseText, function (err, resp) {
-                                console.log(err, resp);
-                            });
+                        // Message everyone in the channel if the question was not answered by the
+                        // Api.ai agent.
+                        if ( response.result.fulfillment.speech === '' ) {
+                            var responseText = '<!channel> The Api.ai agent encountered a request' +
+                              ' it could not answer. Simply prepend a message with `/burner text ' +
+                              returnNumber + '` to reply to the unanswered request.';
+                        // Otherwise, the question was answered, so send an SMS response.
+                        } else {
+                            // Preface the response with the appropriate return SMS number.
+                            var responseText = returnNumber + ' ' + response.result.fulfillment.speech;
                         }
-                    }
-                    // Message everyone in the channel if the question was not answered by the
-                    // Api.ai agent.
-                    else {
-                        var responseText = '<!channel> The Api.ai agent encountered a request' +
-                          ' it could not answer. Simply prepend a message with `/burner text ' +
-                          returnNumber + '` to reply to the unanswered request.'
+
+                        bot.reply( message, responseText, function( err, resp ) {
+                            console.log( err, resp );
+                        } );
                     }
                 });
 
