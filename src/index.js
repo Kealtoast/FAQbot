@@ -65,17 +65,20 @@ controller.hears(['.*'], ['bot_message'], function (bot, message) {
                 var requestText = decoder.decode(message.text);
                 requestText = requestText.replace("’", "'");
 
-                var burnerMesageRegex = /Inbound message from \+(\d*):\s(.*)/;
+                var burnerMessageRegex = /Inbound message from \+(\d*):\s(.*)/;
                 var returnNumber = '';
                 var smsMessage;
 
                 // Parse the SMS message and return number out of Burner's slackbot message
-                if ((smsMessage = burnerMesageRegex.exec(requestText)) !== null) {
-                    returnNumber = '@' + smsMessage[1];
+                if ((smsMessage = burnerMessageRegex.exec(requestText)) !== null) {
+                    returnNumber = smsMessage[1];
                     requestText = smsMessage[2];
 
                     console.log('returnNumber', returnNumber);
                     console.log('requestText', requestText);
+                } else {
+                    // If message pattern is not matched, exit and ignore the message.
+                    return null;
                 }
 
                 var channel = message.channel;
@@ -98,19 +101,24 @@ controller.hears(['.*'], ['bot_message'], function (bot, message) {
                     });
 
                 request.on('response', function (response) {
-                    console.log(response);
+                    console.log('response', response);
 
                     if (isDefined(response.result)) {
-                        // Preface the response with the appropriate return SMS number.
-                        var responseText = returnNumber + ' ' + response.result.fulfillment.speech;
-                        var action = response.result.action;
-
-                        if (isDefined(responseText)) {
-                            bot.reply(message, responseText, function (err, resp) {
-                                console.log(err, resp);
-                            });
+                        // Message everyone in the channel if the question was not answered by the
+                        // Api.ai agent.
+                        if ( response.result.fulfillment.speech === '' || response.result.action === 'smalltalk.unknown' ) {
+                            var responseText = '<!channel> The Api.ai agent encountered a request' +
+                              ' it could not answer. Simply prepend a message with `/burner text ' +
+                              '+' + returnNumber + '` to reply to the unanswered request.';
+                        // Otherwise, the question was answered, so send an SMS response.
+                        } else {
+                            // Preface the response with the appropriate return SMS number.
+                            var responseText = '@' + returnNumber + ' ' + response.result.fulfillment.speech;
                         }
 
+                        bot.reply( message, responseText, function( err, resp ) {
+                            console.log( err, resp );
+                        } );
                     }
                 });
 
