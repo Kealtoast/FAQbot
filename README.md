@@ -77,7 +77,7 @@ That's called *human-assisted artificial intelligence.* And you did it all [with
 
 ## Credits
 
-<p align="center"><img title="Voxable logo" src="https://cloud.githubusercontent.com/assets/2220/14663745/8b5688dc-0689-11e6-95b9-7765fa59128e.png" /></p>
+<p align="center"><a href="https://voxable.io"><img title="Voxable logo" src="https://cloud.githubusercontent.com/assets/2220/14663745/8b5688dc-0689-11e6-95b9-7765fa59128e.png" /></a></p>
 
 This is a fork of [Api.ai's Slack integration](https://github.com/api-ai/api-ai-slack-bot), with [minimal modifications](https://github.com/voxable-labs/burner-sms-api-ai-slackbot/pull/1/files#diff-1fdf421c05c1140f6d71444ea2b27638) needed to make the magic happen with Burner. Brought to you by the good folks at [Voxable](https://voxable.io), who always stand ready to [help you give voice to your product](http://voxable.io/hire-us), in collaboration with the stellar team at [Burner](http://www.burnerapp.com/).
 
