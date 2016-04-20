@@ -113,7 +113,13 @@ controller.hears(['.*'], ['bot_message'], function (bot, message) {
                                 console.log(err, resp);
                             });
                         }
-
+                    }
+                    // Message everyone in the channel if the question was not answered by the
+                    // Api.ai agent.
+                    else {
+                        var responseText = '<!channel> The Api.ai agent encountered a request' +
+                          ' it could not answer. Simply prepend a message with `/burner text ' +
+                          returnNumber + '` to reply to the unanswered request.'
                     }
                 });
 
