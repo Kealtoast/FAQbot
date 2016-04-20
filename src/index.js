@@ -71,7 +71,7 @@ controller.hears(['.*'], ['bot_message'], function (bot, message) {
 
                 // Parse the SMS message and return number out of Burner's slackbot message
                 if ((smsMessage = burnerMessageRegex.exec(requestText)) !== null) {
-                    returnNumber = '@' + smsMessage[1];
+                    returnNumber = smsMessage[1];
                     requestText = smsMessage[2];
 
                     console.log('returnNumber', returnNumber);
@@ -109,11 +109,11 @@ controller.hears(['.*'], ['bot_message'], function (bot, message) {
                         if ( response.result.fulfillment.speech === '' ) {
                             var responseText = '<!channel> The Api.ai agent encountered a request' +
                               ' it could not answer. Simply prepend a message with `/burner text ' +
-                              returnNumber + '` to reply to the unanswered request.';
+                              '+' + returnNumber + '` to reply to the unanswered request.';
                         // Otherwise, the question was answered, so send an SMS response.
                         } else {
                             // Preface the response with the appropriate return SMS number.
-                            var responseText = returnNumber + ' ' + response.result.fulfillment.speech;
+                            var responseText = '@' + returnNumber + ' ' + response.result.fulfillment.speech;
                         }
 
                         bot.reply( message, responseText, function( err, resp ) {
