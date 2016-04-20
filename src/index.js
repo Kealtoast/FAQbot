@@ -76,6 +76,9 @@ controller.hears(['.*'], ['bot_message'], function (bot, message) {
 
                     console.log('returnNumber', returnNumber);
                     console.log('requestText', requestText);
+                } else {
+                    // If message pattern is not matched, exit and ignore the message.
+                    return null;
                 }
 
                 var channel = message.channel;
