@@ -41,13 +41,13 @@ Head back to [your Api.ai workspace](https://console.api.ai/api-client/#/agents)
 
 In the "User says" section, start by adding a question from your FAQ, and press return. You'll notice that the name of the intent at the top will become the first question you entered. On the next line, add another way that someone might phrase that same question, and press return again. Continue this process, adding several different phrasings of the same question, then press the blue "Save" button up at the top. You should have something like the following:
 
-<center>![Example of user utterances](https://cloud.githubusercontent.com/assets/2220/14662576/1b2b143a-067d-11e6-8b76-ac0ac23538a4.png)</center>
+<div style='text-align:center;'><img title="Example of user utterances" src="https://cloud.githubusercontent.com/assets/2220/14662576/1b2b143a-067d-11e6-8b76-ac0ac23538a4.png" /></div>
 
 ## Adding answers
 
 Skip down to the "Speech Response" section (the "Action" section isn't relevant to what we're building). This is where you'll specify the answer to a question:
 
-<center>![Example of answers](https://cloud.githubusercontent.com/assets/2220/14662662/078279fe-067e-11e6-8923-8963433bba56.png)</center>
+<div style='text-align:center;'><img title="Example of answers" src="https://cloud.githubusercontent.com/assets/2220/14662662/078279fe-067e-11e6-8923-8963433bba56.png" /></div>
 
 You'll notice that, as in the "User says" section, you're able to add a number of responses. If you'd like, you can specify several different versions of the same answer to a question, and Api.ai will randomly select one of them as the response. This is [a technique for making your bot seem more intelligent](https://medium.com/building-the-robot-assistant/cheating-on-the-turing-test-bc23a36db10#.vnd2gifjz).
 
@@ -55,7 +55,7 @@ You'll notice that, as in the "User says" section, you're able to add a number o
 
 Click on the grey box in the upper-right-hand corner that says "Try it now..." This is the test console, where you can enter a question you might receive from a custom to see how Api.ai handles it:
 
-<center>![Developer console](https://cloud.githubusercontent.com/assets/2220/14662755/ee926836-067e-11e6-85ba-f99dfb51fc2f.png)</center>
+<div style='text-align:center;'><img title="Developer console" src="https://cloud.githubusercontent.com/assets/2220/14662755/ee926836-067e-11e6-85ba-f99dfb51fc2f.png" /></div>
 
 After you enter (or speak, if you're in Chrome) a question, you can see how your agent handles it. The "Speech Response" section shows us what will be texted back to your customer by the bot, and the "Intent" section shows us which question the agent understood was being asked.
 
@@ -67,17 +67,17 @@ You can repeat this process for as many questions as you would like: adding a ne
 
 Inevitably, though, you'll receive a question that won't be understood. In that case, you'll recieve an announcement in your Slack channel:
 
-<center>![Slack announcement](https://cloud.githubusercontent.com/assets/2220/14662906/6b406a62-0680-11e6-9645-39bce5f2230c.png)</center>
+<div style='text-align:center;'><img title="Slack announcement" src="https://cloud.githubusercontent.com/assets/2220/14662906/6b406a62-0680-11e6-9645-39bce5f2230c.png" /></div>
 
 Humans to the rescue! At this point, your team can respond to the announcement and step in to save the day with the appropriate information for your customer. Just cut and paste the provided slash command, add the correct answer to the customer's query, and Burner will take care of zipping that fresh info back over to your customer as an SMS.
 
-<center>![Example of bot in action](https://cloud.githubusercontent.com/assets/2220/14663594/53aa7976-0688-11e6-856f-8203ec9d4e00.png)</center>
+<div style='text-align:center;'><img title="Example of bot in action" src="https://cloud.githubusercontent.com/assets/2220/14663594/53aa7976-0688-11e6-856f-8203ec9d4e00.png" /></div>
 
 That's called *human-assisted artificial intelligence.* And you did it all [without a $300 billion market cap](http://www.buzzfeed.com/alexkantrowitz/time-to-meet-the-wizard-facebooks-messenger-head-pulls-back#.ohOwdqQVjo)!
 
 ## Credits
 
-<center>![image](https://cloud.githubusercontent.com/assets/2220/14663745/8b5688dc-0689-11e6-95b9-7765fa59128e.png)</center>
+<div style='text-align:center;'><img title="Voxable logo" src="https://cloud.githubusercontent.com/assets/2220/14663745/8b5688dc-0689-11e6-95b9-7765fa59128e.png" /></div>
 
 This is a fork of [Api.ai's Slack integration](https://github.com/api-ai/api-ai-slack-bot), with [minimal modifications](https://github.com/voxable-labs/burner-sms-api-ai-slackbot/pull/1/files#diff-1fdf421c05c1140f6d71444ea2b27638) needed to make the magic happen with Burner. Brought to you by the good folks at [Voxable](https://voxable.io), who always stand ready to [help you give voice to your product](http://voxable.io/hire-us), in collaboration with the stellar team at [Burner](http://www.burnerapp.com/).
 
