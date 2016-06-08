@@ -18,10 +18,9 @@ const Entities = require('html-entities').XmlEntities;
 const decoder = new Entities();
 
 const apiAiAccessToken = process.env.accesstoken;
-const apiAiSubscriptionKey = process.env.subscriptionkey;
 const slackBotKey = process.env.slackkey;
 
-const apiAiService = apiai(apiAiAccessToken, apiAiSubscriptionKey);
+const apiAiService = apiai(apiAiAccessToken);
 
 var sessionIds = {};
 
@@ -33,6 +32,36 @@ const controller = Botkit.slackbot({
 var bot = controller.spawn({
     token: slackBotKey
 }).startRTM();
+
+controller.on('rtm_close', function (bot, err) {
+    console.log('** The RTM api just closed, reason', err);
+    
+    try {
+
+        // sometimes connection closing, so, we should restart bot
+        if (bot.doNotRestart != true) {
+            var token = bot.config.token;
+            console.log('Trying to restart bot ' + token);
+
+            restartBot(bot);
+        }
+
+    } catch (err) {
+        console.error('Restart bot failed', err);
+    }
+});
+
+function restartBot(bot) {
+    bot.startRTM(function (err) {
+        if (err) {
+            console.error('Error restarting bot to Slack:', err);
+        }
+        else {
+            var token = bot.config.token;
+            console.log('Restarted bot for %s', token);
+        }
+    });
+}
 
 function isDefined(obj) {
     if (typeof obj == 'undefined') {
@@ -138,7 +167,7 @@ controller.hears(['.*'], ['bot_message'], function (bot, message) {
 
 //Create a server to prevent Heroku kills the bot
 var server = http.createServer(function (req, res) {
-    res.end()
+    res.end();
 });
 
 //Lets start our server

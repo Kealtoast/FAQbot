@@ -1,4 +1,4 @@
-FROM node:5.3.0
+FROM node:5.10
 
 MAINTAINER Matt Buck <matt@voxable.io>
 

@@ -1,7 +1,6 @@
-# Intelligent SMS Bot via Burner, Slack, and Api.ai
+# FAQbot: An intelligent SMS Bot via Burner, Slack, and Api.ai
 
-By making use of [Burner's Slack connection](http://www.burnerapp.com/slack/) and [Api.ai's Slack integration](https://docs.api.ai/docs/slack-integration), you can easily create an intelligent SMS bot.
-
+By making use of [Burner's Slack connection](http://www.burnerapp.com/slack/) and [Api.ai's Slack integration](https://docs.api.ai/docs/slack-integration), you can easily create an intelligent SMS bot to answer your customers' FAQ (and heck, even some general knowledge questions and smalltalk): **FAQbot**! Never fear: if FAQbot can't answer a question, it will dutifully ask your team to step in to help.
 
 ![burner api-ai slackbot mp4](https://cloud.githubusercontent.com/assets/2220/13895572/a82a92ba-ed42-11e5-8960-8dc91471d64a.gif)
 
@@ -29,9 +28,13 @@ What's happening above:
 
 You're all set! Try texting a question to your Burner line, and you should get a response.
 
+## Ugh, I don't wanna
+
+Don't feel like building this yourself? Think we at Voxable should just stop lollygagging and turn this into a product, already? [Drop us a line](http://voxable.io/hire-us) and let usk now!
+
 ## Creating a human-assisted AI SMS support bot
 
-Using the [Api.ai General Knowledge domain](https://docs.api.ai/docs/domains) to give your agent the ability to engage in small talk or tell you about the weather is all well and good, but Api.ai really shines when you use its interface to add new capabilities to your agent. By using [intents](https://docs.api.ai/docs/concept-intents) to represent questions you frequently recieve from customers, you can easily create an SMS support bot, powered by human-assisted AI!
+Using the [Api.ai General Knowledge domain](https://docs.api.ai/docs/domains) to give FAQbot the ability to engage in small talk or tell you about the weather is all well and good, but Api.ai really shines when you use its interface to add new capabilities to your "agent." By using [intents](https://docs.api.ai/docs/concept-intents) to represent questions you frequently recieve from customers, you can easily create an SMS support bot, powered by human-assisted AI!
 
 ### Adding questions
 
@@ -65,7 +68,7 @@ Notice that, even though the test question was slightly different than any of th
 
 You can repeat this process for as many questions as you would like: adding a new question, adding different versions of the question, adding answers, and testing the agent. Each question you add will save you time the next time that it's asked and then answered automatically. Leave the robot work to the robots.
 
-Inevitably, though, you'll receive a question that won't be understood. In that case, you'll recieve an announcement in your Slack channel:
+Inevitably, though, you'll receive a question that FAQbot won't understand. In that case, you'll recieve an announcement in your Slack channel:
 
 <p align="center"><img title="Slack announcement" src="https://cloud.githubusercontent.com/assets/2220/14662906/6b406a62-0680-11e6-9645-39bce5f2230c.png" /></p>
 
