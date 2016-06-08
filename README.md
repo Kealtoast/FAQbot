@@ -12,14 +12,31 @@ What's happening above:
 * Our Api.ai agent sends back a response, which our slackbot duly posts in the Slack channel, prepended with the phone number that sent the SMS, ensuring that our response gets sent back to the correct user.
 * The Burner Slack connection sends an SMS back to the user.
 
+## Prerequisites
+
+You’ll need 2 keys:
+
+- Client access token for Api.ai
+- Slack bot API token
+
+Before you begin, you'll need:
+
+1. [A Burner account](https://burnerapp.com) and at least 1 phone number. (Free + Trial)
+2. [Access to a Slack team](https://slack.com) and at least 1 phone number. (Free)
+3. [An Api.ai account](https://api.ai) and at least 1 phone number. (Free)
+4. [A Heroku account](https://heroku.com) and at least 1 phone number. (Free)
+
+Don't worry if you don't have one or more of those accounts yet, you can always create them as you go through the setup flow below.
+
 ## Getting started
 
 1. [Create an Api.ai agent.](https://docs.api.ai/docs/get-started#step-1-create-agent)
-2. [Activate the general knowledge domain for your agent.](https://docs.api.ai/docs/domains)
+2. [Activate the Wisdom and Smalltalk domains for your agent.](https://docs.api.ai/docs/domains)
 3. [Obtain your Api.ai authentication keys.](https://docs.api.ai/docs/authentication)
 4. [Create a new slackbot.](https://slack.com/apps/A0F7YS25R-bots) Remember the name of the bot, as you'll need this later.
-5. [Obtain your Slackbot's API token.](https:/lslack.com/apps/manage/A0F7YS25R-bots)
-6. [Enable the Slack connection for your Burner line.](http://www.burnerapp.com/slack/) **Note:** You will need to invite the `burnerbot` Slackbot to the Slack channel in which you have activated the Burner connection.
+5. [Obtain your Slackbot's API token.](https:/slack.com/apps/manage/A0F7YS25R-bots)
+6. [Enable the Slack connection for your Burner line.](http://www.burnerapp.com/slack/)
+7. In Slack, invite @burnerbot and the @bot you created in step 4 to the channel you connected your Burner to in step 6.
 7. Click the handy "Deploy to Heroku" button below to deploy the bot to Heroku.
 
 	[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
