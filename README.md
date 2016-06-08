@@ -49,7 +49,7 @@ You're all set! Try texting a question to your Burner line, and you should get a
 
 ## Ugh, I don't wanna
 
-Don't feel like building this yourself? Think we at Voxable should just stop lollygagging and turn this into a product, already? [Drop us a line](http://voxable.io/hire-us) and let usk now!
+Don't feel like building this yourself? Think we at Voxable should just stop lollygagging and turn this into a product, already? [Drop us a line](http://voxable.io/hire-us) and let us know!
 
 ## Creating a human-assisted AI SMS support bot
 
