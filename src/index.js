@@ -75,7 +75,7 @@ function isDefined(obj) {
     return obj != null;
 }
 
-controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambient'], function (bot, message) {
+controller.hears(['.*'], ['bot_message'], function (bot, message) {
 
     try {
         if (message.type == 'message') {
@@ -85,16 +85,35 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
             else if (message.text.indexOf("<@U") == 0 && message.text.indexOf(bot.identity.id) == -1) {
                 // skip other users direct mentions
             }
+            else if (message.text.includes("Sent text to")) {
+                // skip sent text confirmations from Burner
+                console.log('Skipping Burner response.');
+            }
             else {
 
                 var requestText = decoder.decode(message.text);
                 requestText = requestText.replace("’", "'");
 
+                var burnerMessageRegex = /Inbound message from \+(\d*):\s(.*)/;
+                var returnNumber = '';
+                var smsMessage;
+
+                // Parse the SMS message and return number out of Burner's slackbot message
+                if ((smsMessage = burnerMessageRegex.exec(requestText)) !== null) {
+                    returnNumber = smsMessage[1];
+                    requestText = smsMessage[2];
+
+                    console.log('returnNumber', returnNumber);
+                    console.log('requestText', requestText);
+                } else {
+                    // If message pattern is not matched, exit and ignore the message.
+                    return null;
+                }
+
                 var channel = message.channel;
                 var messageType = message.event;
                 var botId = "<@" + bot.identity.id + ">";
 
-                console.log(requestText);
                 console.log(messageType);
 
                 if (requestText.indexOf(botId) > -1) {
@@ -111,18 +130,24 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
                     });
 
                 request.on('response', function (response) {
-                    console.log(response);
+                    console.log('response', response);
 
                     if (isDefined(response.result)) {
-                        var responseText = response.result.fulfillment.speech;
-                        var action = response.result.action;
-
-                        if (isDefined(responseText)) {
-                            bot.reply(message, responseText, function (err, resp) {
-                                console.log(err, resp);
-                            });
+                        // Message everyone in the channel if the question was not answered by the
+                        // Api.ai agent.
+                        if ( response.result.fulfillment.speech === '' || response.result.action === 'smalltalk.unknown' ) {
+                            var responseText = '<!channel> The Api.ai agent encountered a request' +
+                              ' it could not answer. Simply prepend a message with `/burner text ' +
+                              '+' + returnNumber + '` to reply to the unanswered request.';
+                        // Otherwise, the question was answered, so send an SMS response.
+                        } else {
+                            // Preface the response with the appropriate return SMS number.
+                            var responseText = '@' + returnNumber + ' ' + response.result.fulfillment.speech;
                         }
 
+                        bot.reply( message, responseText, function( err, resp ) {
+                            console.log( err, resp );
+                        } );
                     }
                 });
 
