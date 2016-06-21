@@ -2,7 +2,9 @@
 
 # An intelligent SMS Bot via Burner, Slack, and Api.ai
 
-By making use of [Burner's Slack connection](http://www.burnerapp.com/slack/) and [Api.ai's Slack integration](https://docs.api.ai/docs/slack-integration), you can easily create an intelligent SMS bot to answer your customers' FAQ (and heck, even some general knowledge questions and smalltalk): **FAQbot**! Never fear: if FAQbot can't answer a question, it will dutifully ask your team to step in to help.
+FAQBot is an SMS bot that augments [Burner's Slack connection](http://www.burnerapp.com/slack/) by enabling an [Api.ai](http://api.ai)-powered agent to sit alongside the humans in your Slack channel and respond automatically and intelligently to incoming texts. FAQBot is designed as a customer service bot: it can answer questions about your product and even some general knowledge questions.  It can also serve as reference code for anyone who wants to augment a human-powered, Burner-connected Slack channel and add an API.ai or other 3rd-party bot agent to that channel.  
+
+FAQBot is [a fork of API.ai's Slack connection](https://docs.api.ai/docs/slack-integration) and was built by Voxable.
 
 ![burner api-ai slackbot mp4](https://cloud.githubusercontent.com/assets/2220/13895572/a82a92ba-ed42-11e5-8960-8dc91471d64a.gif)
 
