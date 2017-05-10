@@ -142,7 +142,7 @@ controller.hears(['.*'], ['bot_message'], function (bot, message) {
                         // Otherwise, the question was answered, so send an SMS response.
                         } else {
                             // Preface the response with the appropriate return SMS number.
-                            var responseText = '@' + returnNumber + ' ' + response.result.fulfillment.speech;
+                            var responseText = '/burner text +' + returnNumber + ' ' + response.result.fulfillment.speech;
                         }
 
                         bot.reply( message, responseText, function( err, resp ) {
